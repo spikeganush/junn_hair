@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from '../img/logo.png'
 import Auth from './Auth'
 
 function Header({ authed, handleLogout, setMessageHome }) {
@@ -14,11 +13,6 @@ function Header({ authed, handleLogout, setMessageHome }) {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="left">
           <NavLink className="navbar-brand" to="/">
-            <img
-              src={logo}
-              className="logo d-inline-block align-center"
-              alt=""
-            />
             <span className="navbar-brand mb-0 h1">
               <strong>
                 <span className="text-light">

@@ -130,12 +130,6 @@ main {
 
 /* ---------------navbar-------------------- */
 
-.logo {
-  width: 40px;
-  height: 20px;
-  margin-right: 1rem;
-}
-
 .bg-light {
   background-color: var(--bg-hf) !important;
 }
@@ -157,6 +151,13 @@ main {
   box-shadow: 0 0 5px black;
 }
 
+.navbar-nav {
+  flex-direction: row !important;
+}
+
+.nav-item:first-child {
+  margin-right: 1rem;
+}
 /*------------------------Modal---------------------------- */
 
 .popup-profil-container {
