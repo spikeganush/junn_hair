@@ -20,63 +20,67 @@ function Message({ appointments, finalMessages }) {
   return (
     <main>
       {appointments.length > 0 ? (
-        <h1>Reminder (more than 5 days)</h1>
+        <h1 className="title">Reminder (more than 5 days)</h1>
       ) : (
-        <h1>No reminder</h1>
+        <h1 className="title">No reminder</h1>
       )}
-      {/* map appointments to list and show a card for each appointment more than 5 days but less than 7 */}
-      {appointments &&
-        appointments.map((appointment) => (
-          <div className="appointment-card" key={appointment.id}>
-            <h2>Name: {appointment.customerName}</h2>
-            <p>Email: {appointment.customerEmail}</p>
-            <p>Phone: {appointment.customerPhone}</p>
-            <p>
-              Appointment date:{' '}
-              {appointment.date.toDate().toLocaleString([], {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-              })}
-            </p>
-            <button
-              className="btn btn-primary"
-              onClick={() => handleReminder(appointment.id)}
-            >
-              Reminder sent
-            </button>
-          </div>
-        ))}
+      <div className="wrapper">
+        {/* map appointments to list and show a card for each appointment more than 5 days but less than 7 */}
+        {appointments &&
+          appointments.map((appointment) => (
+            <div className="appointment-card" key={appointment.id}>
+              <h2>Name: {appointment.customerName}</h2>
+              <p>Email: {appointment.customerEmail}</p>
+              <p>Phone: {appointment.customerPhone}</p>
+              <p>
+                Appointment date:{' '}
+                {appointment.date.toDate().toLocaleString([], {
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                })}
+              </p>
+              <p>Deposit amount : ${appointment.depositAmount}</p>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleReminder(appointment.id)}
+              >
+                Reminder sent
+              </button>
+            </div>
+          ))}
+      </div>
       {finalMessages.length > 0 ? (
-        <h1 className="final-message-title">
-          final message (more than 7 days)
-        </h1>
+        <h1 className="title">Final message (more than 7 days)</h1>
       ) : (
-        <h1 className="final-message-title">No final message</h1>
+        <h1 className="title">No final message</h1>
       )}
-      {/* map appointments to list and show a card for each appointment more than 7 days */}
-      {finalMessages &&
-        finalMessages.map((finalMessage) => (
-          <div className="appointment-card" key={finalMessage.id}>
-            <h2>Name: {finalMessage.customerName}</h2>
-            <p>Email: {finalMessage.customerEmail}</p>
-            <p>Phone: {finalMessage.customerPhone}</p>
-            <p>
-              Appointment date:{' '}
-              {finalMessage.date.toDate().toLocaleString([], {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-              })}
-            </p>
-            <button
-              className="btn btn-primary"
-              onClick={() => handlefinalMessage(finalMessage.id)}
-            >
-              Final message sent
-            </button>
-          </div>
-        ))}
+      <div className="wrapper">
+        {/* map appointments to list and show a card for each appointment more than 7 days */}
+        {finalMessages &&
+          finalMessages.map((finalMessage) => (
+            <div className="appointment-card" key={finalMessage.id}>
+              <h2>Name: {finalMessage.customerName}</h2>
+              <p>Email: {finalMessage.customerEmail}</p>
+              <p>Phone: {finalMessage.customerPhone}</p>
+              <p>
+                Appointment date:{' '}
+                {finalMessage.date.toDate().toLocaleString([], {
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                })}
+              </p>
+              <p>Deposit amount : ${finalMessage.depositAmount}</p>
+              <button
+                className="btn btn-primary"
+                onClick={() => handlefinalMessage(finalMessage.id)}
+              >
+                Final message sent
+              </button>
+            </div>
+          ))}
+      </div>
     </main>
   )
 }

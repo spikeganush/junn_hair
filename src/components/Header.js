@@ -12,7 +12,7 @@ function Header({ authed, handleLogout, setMessageHome }) {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="left">
-          <NavLink className="navbar-brand" to="/">
+          <NavLink className="nav-link" to="/">
             <span className="navbar-brand mb-0 h1">
               <strong>
                 <span className="text-light">
@@ -52,31 +52,23 @@ function Header({ authed, handleLogout, setMessageHome }) {
               <strong>
                 {authed ? (
                   <>
-                    <span className="text-light">
-                      <i className="fas fa-sign-out-alt"></i>
-                    </span>
                     <span
-                      className="text-light login-link"
+                      className="text-light"
                       onClick={() => {
                         handleLogout()
                         setLoginPopup(true)
                       }}
                     >
-                      {' '}
-                      Logout
+                      <i className="fas fa-sign-out-alt"></i>
                     </span>
                   </>
                 ) : (
                   <>
-                    <span className="text-light">
-                      <i className="fas fa-sign-in-alt"></i>
-                    </span>
                     <span
-                      className="text-light login-link"
+                      className="text-light"
                       onClick={() => setLoginPopup(true)}
                     >
-                      {' '}
-                      Login
+                      <i className="fas fa-sign-in-alt"></i>
                     </span>
                   </>
                 )}

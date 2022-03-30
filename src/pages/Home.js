@@ -10,6 +10,7 @@ function Home({ currentUser, messageHome }) {
   const [customerName, setCustomerName] = useState()
   const [customerEmail, setCustomerEmail] = useState()
   const [customerPhone, setCustomerPhone] = useState()
+  const [depositAmount, setDepositAmount] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -29,7 +30,8 @@ function Home({ currentUser, messageHome }) {
     if (
       customerName === undefined &&
       customerEmail === undefined &&
-      customerPhone === undefined
+      customerPhone === undefined &&
+      depositAmount === 0
     ) {
       setTimeout(() => {
         setError('')
@@ -52,6 +54,14 @@ function Home({ currentUser, messageHome }) {
       }, 5000)
       setLoading(false)
       return setError('Please enter customer email')
+    }
+
+    if (depositAmount === 0) {
+      setTimeout(() => {
+        setError('')
+      }, 5000)
+      setLoading(false)
+      return setError('Please enter deposit amount')
     }
 
     if (!validator.isEmail(customerEmail)) {
@@ -80,6 +90,7 @@ function Home({ currentUser, messageHome }) {
           customerName: customerName,
           customerEmail: customerEmail,
           customerPhone: customerPhone,
+          depositAmount: depositAmount,
           messageReminder: false,
           finalMessage: false,
           date: value,
@@ -149,6 +160,18 @@ function Home({ currentUser, messageHome }) {
                 placeholder="Phone number"
                 onChange={(e) => setCustomerPhone(e.target.value)}
                 value={customerPhone ? customerPhone : ''}
+                tabIndex={2}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Deposit amount $:</label>
+              <input
+                type="number"
+                required
+                id="amount"
+                placeholder="Deposit amount"
+                onChange={(e) => setDepositAmount(e.target.value)}
+                value={depositAmount ? depositAmount : ''}
                 tabIndex={2}
               />
             </div>

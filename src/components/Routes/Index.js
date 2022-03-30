@@ -25,9 +25,7 @@ function Index() {
   const [user, setUser] = useState()
   const [authed, setAuthed] = useState()
   const [currentUser, setCurrentUser] = useState()
-  const [messageHome, setMessageHome] = useState(
-    'You need to be admin to access this page'
-  )
+  const [messageHome, setMessageHome] = useState('')
 
   const [appointments, setAppointments] = useState([])
   const [appointmentsNeedMessage, setAppointmentsNeedMessage] = useState([])
@@ -36,7 +34,7 @@ function Index() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setMessageHome('Loading...')
+        setMessageHome('Loaded!')
         setUser(user)
         setAuthed(true)
       } else {
@@ -93,6 +91,10 @@ function Index() {
     return () => unsubscribe()
   }, [])
 
+  useEffect(() => {
+    setMessageHome('You need to be logged to have access to this page.')
+  }, [])
+
   const getUserDetails = async (id) => {
     const docRef = doc(db, 'users', id)
     const docData = await getDoc(docRef)
@@ -113,6 +115,7 @@ function Index() {
         setAuthed(false)
         setUser(null)
         setCurrentUser(null)
+        setMessageHome('You need to be logged to have access to this page.')
       })
       .catch((error) => console.log(error.code))
   }
@@ -133,7 +136,7 @@ function Index() {
                 <Home currentUser={currentUser} messageHome={messageHome} />
               ) : (
                 <main>
-                  <h1>{messageHome}</h1>
+                  <h1 className="message-home">{messageHome}</h1>
                 </main>
               )}
             </>

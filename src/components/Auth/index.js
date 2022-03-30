@@ -69,6 +69,7 @@ const Auth = (props) => {
     const signInWithGoogle = () => {
       //signin with google
       setLoadingGoogle(true)
+      props.setMessageHome('We are loading your information.')
 
       const provider = new GoogleAuthProvider()
       if (screenWidth > 768) {
@@ -80,6 +81,7 @@ const Auth = (props) => {
             if (docSnap.exists()) {
               //console.log('user exists')
               props.popup(false)
+
               navigate('/')
             } else {
               updateProfile(auth.currentUser, {
@@ -99,7 +101,7 @@ const Auth = (props) => {
       } else {
         signInWithRedirect(auth, provider)
           .then(async () => {
-            props.setMessageHome('Loading...')
+            props.setMessageHome('test.')
             const docRef = doc(db, 'users', auth.currentUser.uid)
             const docSnap = await getDoc(docRef)
 
@@ -121,7 +123,10 @@ const Auth = (props) => {
               navigate('/')
             }
           })
-          .catch((e) => console.log(e.message))
+          .catch((e) => {
+            props.setMessageHome('Error during the logging.')
+            console.log(e.message)
+          })
       }
     }
 
