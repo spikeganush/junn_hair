@@ -648,6 +648,12 @@ footer {
   .form-group label {
     font-size: 1.3rem;
   }
+
+  nav,
+  main,
+  footer {
+    padding-inline: 15px;
+  }
 }
 @media screen and (min-width: 600px) {
   .text-light {
