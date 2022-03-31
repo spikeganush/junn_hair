@@ -305,6 +305,10 @@ main {
   transform: translateX(2px);
 }
 
+.form-group {
+  position: relative;
+}
+
 .form-group,
 .form-group label,
 .form-group input {
@@ -427,6 +431,25 @@ main {
   padding: 0.5em 1em;
   border: 3px solid var(--bg-hf);
 }
+
+.dataResult {
+  position: absolute;
+  top: 68px;
+  width: 100%;
+  padding: 15px;
+  height: auto;
+  border-radius: 0 0 15px 15px;
+  background-color: #f4f4f4;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 5px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.search-return {
+  color: black;
+  margin-bottom: 1rem;
+}
+
 /* ---------------/Home-------------------- */
 
 /* ---------------List-------------------- */
@@ -438,6 +461,7 @@ main {
   align-items: center;
   justify-content: space-evenly;
 }
+
 .appointment-card {
   display: grid;
   grid-gap: 1rem;

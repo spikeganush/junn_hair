@@ -31,30 +31,8 @@ function Index() {
   const [appointmentsNeedMessage, setAppointmentsNeedMessage] = useState([])
   const [appointmentsfinalMessage, setAppointmentsfinalMessage] = useState([])
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setMessageHome('Loaded!')
-        setUser(user)
-        setAuthed(true)
-      } else {
-        setUser(null)
-        setAuthed(false)
-        setCurrentUser(null)
-      }
-    })
-  })
-
-  useEffect(() => {
-    if (!currentUser && user) {
-      getUserDetails(user?.uid).then((user) => {
-        setCurrentUser(user)
-      })
-    }
-  }, [currentUser, user])
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
+  const updateData = async () => {
+    onSnapshot(
       collection(db, 'appointments'),
       orderBy('date', 'desc'),
       (snapshot) => {
@@ -88,7 +66,32 @@ function Index() {
         setAppointmentsfinalMessage(appointmentsfinalMessage)
       }
     )
-    return () => unsubscribe()
+  }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setMessageHome('Loaded!')
+        setUser(user)
+        setAuthed(true)
+      } else {
+        setUser(null)
+        setAuthed(false)
+        setCurrentUser(null)
+      }
+    })
+  })
+
+  useEffect(() => {
+    if (!currentUser && user) {
+      getUserDetails(user?.uid).then((user) => {
+        setCurrentUser(user)
+      })
+    }
+  }, [currentUser, user])
+
+  useEffect(() => {
+    updateData()
   }, [])
 
   useEffect(() => {
@@ -133,7 +136,11 @@ function Index() {
           element={
             <>
               {currentUser?.admin ? (
-                <Home currentUser={currentUser} messageHome={messageHome} />
+                <Home
+                  data={appointments}
+                  currentUser={currentUser}
+                  messageHome={messageHome}
+                />
               ) : (
                 <main>
                   <h1 className="message-home">{messageHome}</h1>
