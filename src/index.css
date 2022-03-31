@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 /*─────────────────────────────────────────────────────────────────────────────────────────────────*/
 /*─────────────────────────────────────────────────────────────────────────────────────────────────*/
 /*─
@@ -41,6 +43,7 @@ button {
   border: 0;
   font: inherit;
   font-size: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 ul {
   list-style: none;
@@ -551,7 +554,7 @@ footer {
   }
 
   .title {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .welcome,
@@ -607,11 +610,11 @@ footer {
 
 @media screen and (min-width: 375px) {
   .text-light {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .welcome,
@@ -622,6 +625,12 @@ footer {
   .appointment-date,
   .form-group label {
     font-size: 1.2rem;
+  }
+
+  nav,
+  main,
+  footer {
+    padding-inline: 5px;
   }
 }
 
