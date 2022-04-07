@@ -3,9 +3,9 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import validator from 'validator'
 import db from '../firebase'
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, query, where, getDocs } from 'firebase/firestore'
 
-function Home({ data, currentUser, messageHome }) {
+function Home({ clients, data, currentUser, messageHome }) {
   const [value, onChange] = useState(new Date())
   const [customerName, setCustomerName] = useState()
   const [customerEmail, setCustomerEmail] = useState()
@@ -21,7 +21,7 @@ function Home({ data, currentUser, messageHome }) {
   const handleNameFilter = (e) => {
     const searchWord = e.target.value
     setCustomerName(searchWord)
-    const newFilter = data.filter((value) => {
+    const newFilter = clients.filter((value) => {
       return value.customerName.toLowerCase().includes(searchWord.toLowerCase())
     })
     if (customerName?.length === 0) {
@@ -34,7 +34,7 @@ function Home({ data, currentUser, messageHome }) {
   const handleEmailFilter = (e) => {
     const searchWord = e.target.value
     setCustomerEmail(searchWord)
-    const newFilter = data.filter((value) => {
+    const newFilter = clients.filter((value) => {
       return value.customerEmail
         .toLowerCase()
         .includes(searchWord.toLowerCase())
@@ -49,7 +49,7 @@ function Home({ data, currentUser, messageHome }) {
   const handlePhoneFilter = (e) => {
     const searchWord = e.target.value
     setCustomerPhone(searchWord)
-    const newFilter = data.filter((value) => {
+    const newFilter = clients.filter((value) => {
       return value.customerPhone
         .toLowerCase()
         .includes(searchWord.toLowerCase())
@@ -141,12 +141,15 @@ function Home({ data, currentUser, messageHome }) {
           finalMessage: false,
           date: value,
         }
+
+        saveDataClient()
         await addDoc(collection(db, 'appointments'), data)
         setLoading(false)
         setError('')
         setCustomerName('')
         setCustomerEmail('')
         setCustomerPhone('')
+        setDepositAmount(0)
         setSuccess('Appointment booked successfully')
         setTimeout(() => {
           setSuccess('')
@@ -158,6 +161,23 @@ function Home({ data, currentUser, messageHome }) {
         setLoading(false)
         setError(err.message)
       }
+    }
+  }
+
+  const saveDataClient = async () => {
+    const dataClients = {
+      customerName: customerName,
+      customerEmail: customerEmail,
+      customerPhone: customerPhone,
+      depositAmount: depositAmount,
+    }
+
+    //get clients docs firebase
+    const clients = collection(db, 'clients')
+    const q = query(clients, where('customerEmail', '==', customerEmail))
+    const snapshot = await getDocs(q)
+    if (snapshot.size === 0) {
+      await addDoc(collection(db, 'clients'), dataClients)
     }
   }
 

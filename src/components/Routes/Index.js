@@ -31,6 +31,21 @@ function Index() {
   const [appointmentsNeedMessage, setAppointmentsNeedMessage] = useState([])
   const [appointmentsfinalMessage, setAppointmentsfinalMessage] = useState([])
 
+  const [clientsData, setClientsData] = useState([])
+
+  const updateClientsData = async () => {
+    onSnapshot(collection(db, 'clients'), (snapshot) => {
+      const clients = []
+      snapshot.forEach((doc) => {
+        clients.push({
+          id: doc.id,
+          ...doc.data(),
+        })
+      })
+      setClientsData(clients)
+    })
+  }
+
   const updateData = async () => {
     onSnapshot(
       collection(db, 'appointments'),
@@ -92,6 +107,7 @@ function Index() {
 
   useEffect(() => {
     updateData()
+    updateClientsData()
   }, [])
 
   useEffect(() => {
@@ -137,6 +153,7 @@ function Index() {
             <>
               {currentUser?.admin ? (
                 <Home
+                  clients={clientsData}
                   data={appointments}
                   currentUser={currentUser}
                   messageHome={messageHome}
