@@ -239,7 +239,10 @@ function EditAppointment({ appointment, setEdit, edit }) {
         <button
           disabled={loading}
           className="button-cancel"
-          onClick={() => setEdit(!edit)}
+          onClick={() => {
+            saveDataClient()
+            setEdit(!edit)
+          }}
         >
           Cancel
         </button>
