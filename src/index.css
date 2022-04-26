@@ -388,11 +388,10 @@ main {
   margin-bottom: 2rem;
 }
 
-.button {
+.button,
+.button-cancel {
   width: 100%;
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
@@ -409,6 +408,17 @@ main {
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.button {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.button-cancel {
+  margin-top: 1rem;
+  background-color: #888b91;
+  border-color: #888b91;
 }
 
 .form-group input {
@@ -474,6 +484,15 @@ main {
   box-shadow: 0px 0px 10px 2px hsla(0, 0%, 0%, 0.4);
   max-width: 415px;
   min-width: 300px;
+}
+
+.top-card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit {
+  width: 20px;
 }
 
 @media screen and (max-width: 325px) {
