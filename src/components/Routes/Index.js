@@ -58,9 +58,9 @@ function Index() {
           appointments.push({ ...doc.data(), id: doc.id })
 
           if (
-            new Date(doc.data().date.toDate()).getTime() <=
+            new Date(doc.data().startDate.toDate()).getTime() <=
               new Date().getTime() - 432000000 &&
-            new Date(doc.data().date.toDate()).getTime() >=
+            new Date(doc.data().startDate.toDate()).getTime() >=
               new Date().getTime() - 604800000 &&
             !doc.data().messageReminder &&
             !doc.data().payed
@@ -69,7 +69,7 @@ function Index() {
           }
 
           if (
-            new Date(doc.data().date.toDate()).getTime() <=
+            new Date(doc.data().startDate.toDate()).getTime() <=
               new Date().getTime() - 604800000 &&
             !doc.data().finalMessage &&
             !doc.data().payed

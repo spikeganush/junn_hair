@@ -38,7 +38,7 @@ function Card({ appointment }) {
       <p>Phone: {appointment.customerPhone}</p>
       <p>
         Appointment date:{' '}
-        {appointment.date.toDate().toLocaleString([], {
+        {appointment.appointmentDate.toDate().toLocaleString('en-GB', {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
@@ -50,7 +50,7 @@ function Card({ appointment }) {
         <div className="checkboxes">
           <Switch
             isOn={appointment ? appointment.payed : false}
-            text="Deposite payed"
+            text="Deposit payed"
             data={appointment}
             handleToggle={() => updatePayed(appointment.id, !appointment.payed)}
           />

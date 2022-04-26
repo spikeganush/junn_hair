@@ -8,7 +8,7 @@ function CardMessage({ appointment, handleAction, handlePayment, text }) {
       <p>Phone: {appointment.customerPhone}</p>
       <p>
         Appointment date:{' '}
-        {appointment.date.toDate().toLocaleString([], {
+        {appointment.appointmentDate.toDate().toLocaleString('en-GB', {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',

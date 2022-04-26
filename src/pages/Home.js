@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import validator from 'validator'
 import db from '../firebase'
 import { collection, addDoc, query, where, getDocs } from 'firebase/firestore'
 
-function Home({ clients, data, currentUser, messageHome }) {
+function Home({ clients, currentUser, messageHome }) {
   const [value, onChange] = useState(new Date())
+  const [today, setToday] = useState(new Date())
   const [customerName, setCustomerName] = useState()
   const [customerEmail, setCustomerEmail] = useState()
   const [customerPhone, setCustomerPhone] = useState()
@@ -17,6 +18,11 @@ function Home({ clients, data, currentUser, messageHome }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+
+  //Store the today date in the variable today
+  useEffect(() => {
+    setToday(value)
+  }, [])
 
   const handleNameFilter = (e) => {
     const searchWord = e.target.value
@@ -140,7 +146,8 @@ function Home({ clients, data, currentUser, messageHome }) {
           messageReminder: false,
           finalMessage: false,
           payed: false,
-          date: value,
+          startDate: today,
+          appointmentDate: value,
         }
 
         saveDataClient()

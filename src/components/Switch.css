@@ -16,6 +16,7 @@
   position: relative;
   margin-right: 1rem;
   transition: background-color 0.2s;
+  box-shadow: 0px 0px 3px black;
 }
 
 .react-switch-label .react-switch-button {
