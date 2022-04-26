@@ -15,6 +15,7 @@ import db from '../../firebase'
 import {
   doc,
   getDoc,
+  query,
   onSnapshot,
   collection,
   orderBy,
@@ -47,42 +48,39 @@ function Index() {
   }
 
   const updateData = async () => {
-    onSnapshot(
-      collection(db, 'appointments'),
-      orderBy('date', 'desc'),
-      (snapshot) => {
-        const appointments = []
-        const appointmentsNeedMessage = []
-        const appointmentsfinalMessage = []
-        snapshot.forEach((doc) => {
-          appointments.push({ ...doc.data(), id: doc.id })
+    const q = query(collection(db, 'appointments'), orderBy('appointmentDate'))
+    onSnapshot(q, (snapshot) => {
+      const appointments = []
+      const appointmentsNeedMessage = []
+      const appointmentsfinalMessage = []
+      snapshot.forEach((doc) => {
+        appointments.push({ ...doc.data(), id: doc.id })
 
-          if (
-            new Date(doc.data().startDate.toDate()).getTime() <=
-              new Date().getTime() - 432000000 &&
-            new Date(doc.data().startDate.toDate()).getTime() >=
-              new Date().getTime() - 604800000 &&
-            !doc.data().messageReminder &&
-            !doc.data().payed
-          ) {
-            appointmentsNeedMessage.push({ ...doc.data(), id: doc.id })
-          }
+        if (
+          new Date(doc.data().startDate.toDate()).getTime() <=
+            new Date().getTime() - 432000000 &&
+          new Date(doc.data().startDate.toDate()).getTime() >=
+            new Date().getTime() - 604800000 &&
+          !doc.data().messageReminder &&
+          !doc.data().payed
+        ) {
+          appointmentsNeedMessage.push({ ...doc.data(), id: doc.id })
+        }
 
-          if (
-            new Date(doc.data().startDate.toDate()).getTime() <=
-              new Date().getTime() - 604800000 &&
-            !doc.data().finalMessage &&
-            !doc.data().payed
-          ) {
-            appointmentsfinalMessage.push({ ...doc.data(), id: doc.id })
-          }
-        })
+        if (
+          new Date(doc.data().startDate.toDate()).getTime() <=
+            new Date().getTime() - 604800000 &&
+          !doc.data().finalMessage &&
+          !doc.data().payed
+        ) {
+          appointmentsfinalMessage.push({ ...doc.data(), id: doc.id })
+        }
+      })
 
-        setAppointments(appointments)
-        setAppointmentsNeedMessage(appointmentsNeedMessage)
-        setAppointmentsfinalMessage(appointmentsfinalMessage)
-      }
-    )
+      setAppointments(appointments)
+      setAppointmentsNeedMessage(appointmentsNeedMessage)
+      setAppointmentsfinalMessage(appointmentsfinalMessage)
+    })
   }
 
   useEffect(() => {
