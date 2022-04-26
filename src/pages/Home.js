@@ -139,6 +139,7 @@ function Home({ clients, data, currentUser, messageHome }) {
           depositAmount: depositAmount,
           messageReminder: false,
           finalMessage: false,
+          payed: false,
           date: value,
         }
 

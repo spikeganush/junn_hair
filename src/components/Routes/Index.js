@@ -18,6 +18,7 @@ import {
   onSnapshot,
   collection,
   orderBy,
+  where,
 } from '@firebase/firestore'
 
 function Index() {
@@ -62,7 +63,8 @@ function Index() {
               new Date().getTime() - 432000000 &&
             new Date(doc.data().date.toDate()).getTime() >=
               new Date().getTime() - 604800000 &&
-            !doc.data().messageReminder
+            !doc.data().messageReminder &&
+            !doc.data().payed
           ) {
             appointmentsNeedMessage.push({ ...doc.data(), id: doc.id })
           }
@@ -70,7 +72,8 @@ function Index() {
           if (
             new Date(doc.data().date.toDate()).getTime() <=
               new Date().getTime() - 604800000 &&
-            !doc.data().finalMessage
+            !doc.data().finalMessage &&
+            !doc.data().payed
           ) {
             appointmentsfinalMessage.push({ ...doc.data(), id: doc.id })
           }
