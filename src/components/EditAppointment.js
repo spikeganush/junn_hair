@@ -237,7 +237,6 @@ function EditAppointment({ appointment, setEdit, edit }) {
           {loading ? 'Register ...' : 'Register'}
         </button>
         <button
-          disabled={loading}
           className="button-cancel"
           onClick={() => {
             saveDataClient()
