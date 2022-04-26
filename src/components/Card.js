@@ -31,8 +31,6 @@ function Card({ appointment }) {
     })
   }
 
-  const monCul = () => {}
-
   return (
     <div className="appointment-card" key={appointment.id}>
       <h2>Name: {appointment.customerName}</h2>

@@ -18,7 +18,6 @@ import {
   onSnapshot,
   collection,
   orderBy,
-  where,
 } from '@firebase/firestore'
 
 function Index() {
